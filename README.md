@@ -20,7 +20,6 @@ El sistema utilizará técnicas avanzadas de analítica y aprendizaje automátic
 **TODO**
 
 ## Requerimientos
-**Nota:** Obligatorio: Minimo debe escribir los requerimientos por cada lenguaje de programacion usado tanto en el back-end (Ej: Python, R) como en el front-end, si aplica. Tambien, es importante que ponga las versiones correspondientes.
 
 ### Librerías Empleadas
 A continuación se detallan las librerías utilizadas en el proyecto, junto con sus respectivas versiones. Estas son esenciales para el correcto funcionamiento de la solución:

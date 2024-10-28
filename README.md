@@ -5,7 +5,7 @@
 * [Descripción de la solución](#descripción-de-la-solución)
 * [Conclusiones](#descripción-de-la-solución)
 * [Requerimientos](#requerimientos)
-* [Instalacion](#instalación)
+* [Instalación](#instalación)
 * [Autores](#autores)
 * [Asociados](#autores)
 
@@ -117,23 +117,23 @@ El software necesario para ejecutar el proyecto incluye:
 
        Ciencia-de-Datos-Aplicada-Proyecto-Final/analytics/primera entrega/
 
-   Para la entrega final, la ejecución del tablero de contról estará disponible en
+   Para la entrega final, la ejecución del tablero de control estará disponible en
 
        Ciencia-de-Datos-Aplicada-Proyecto-Final/analytics/entrega final/
 
 
 ## Autores
 
-| Organización   | Nombre del Miembro | Correo electronico | 
+| Organización   | Nombre del Miembro | Correo electrónico | 
 |----------|-------------|-------------|
 | Universidad de los Andes - Bogotá |  Adriana María Rios: Desarrollador(a)/Estudiante  | am.rios2@uniandes.edu.co |
 | Universidad de los Andes - Bogotá |  Andrés Francisco Borda Rincón: Desarrollador(a)/Estudiante  | af.borda@uniandes.edu.co |
 | Universidad de los Andes - Bogotá  |  Daniel Felipe Vargas Ulloa: Desarrollador(a)/Estudiante  | d.vargasu@uniandes.edu.co |
 | Universidad de los Andes - Bogotá  |  Diego Alberto Rodríguez Cruz: Desarrollador(a)/Estudiante  | da.rodriguezc123@uniandes.edu.co |
 
-## Asociadios
+## Asociados
 
-| Organización   | Nombre del Miembro | Correo electronico | 
+| Organización   | Nombre del Miembro | Correo electrónico | 
 |----------|-------------|-------------|
 | PUJ-Bogotá |  Liliana María Pantoja Rojas: Líder proyecto CAOBA | lm_pantoja@javeriana.edu.co |
 | Institución Universitaria Escuela Nacional del Deporte |  Andrés Felipe Cárdenas Borrero: Lider del negocio  | andresf.cardenas@endeporte.edu.co |

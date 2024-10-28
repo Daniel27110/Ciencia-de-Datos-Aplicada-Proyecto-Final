@@ -114,7 +114,7 @@ El software necesario para ejecutar el proyecto incluye:
    pip freeze
    ```
 
-4. **Ejecutar los arhcivos de exploración**:
+4. **Ejecutar los archivos de exploración**:
 
    Para esta primera entrega, los archivos de exploración de datos se encuentran en el directorio del repositorio:
 

@@ -114,6 +114,15 @@ El software necesario para ejecutar el proyecto incluye:
    pip freeze
    ```
 
+4. **Ejecutar los arhcivos de exploración**:
+
+   Para esta primera entrega, los archivos de exploración de datos se encuentran en el directorio del repositorio:
+
+       Ciencia-de-Datos-Aplicada-Proyecto-Final/analytics/primera entrega/
+
+   Para la entrega final, la ejecución del tablero de contról estará disponible en
+
+       Ciencia-de-Datos-Aplicada-Proyecto-Final/analytics/entrega final/
 
 
 ## Autores

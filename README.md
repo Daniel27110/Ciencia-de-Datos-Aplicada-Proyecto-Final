@@ -16,17 +16,14 @@ Este proyecto aborda la problemática de la deserción estudiantil en institucio
 El sistema utilizará técnicas avanzadas de analítica y aprendizaje automático para construir un modelo predictivo que identifique a los estudiantes en riesgo. Esto permitirá implementar estrategias de intervención personalizadas, optimizar el uso de los recursos institucionales y fortalecer la toma de decisiones basadas en datos.
 
 ## Conclusiones
- 
 
-* Se encontró una alta correlación entre el promedio del último semestre, semestre cursado y estrato sobre la tasa de deserción de los estudiantes de ENDEPORTE.​
+ * Se encontró una alta correlación entre el promedio del último semestre, semestre cursado y estrato sobre la tasa de deserción de los estudiantes de ENDEPORTE.
 
-* Se evidenció que los estudiantes residentes en municipios aledaños a Cali tienen una mayor tasa de deserción, posiblemente relacionada con el tiempo de desplazamiento hasta la entidad.​
+ * Se evidenció que los estudiantes residentes en municipios aledaños a Cali tienen una mayor tasa de deserción, posiblemente relacionada con el tiempo de desplazamiento hasta la entidad.
 
-* Los estudiantes que desertaron obtuvieron un promedio en su último semestre 0.47 desviaciones estándar por debajo del promedio general de todos los estudiantes.​
+ * Los estudiantes que desertaron mostraron un promedio en su último semestre que se sitúa 0.47 desviaciones estándar por debajo del promedio general de todos los estudiantes. Asimismo, se observó que la mayor tasa de deserción ocurre durante los primeros tres semestres, lo que podría atribuirse a la dificultad de las materias de ciencias básicas que se cursan en ese periodo.
 
-* Se encontró que la mayor tasa de deserción recae en los primeros tres semestres, posiblemente debido a que se cursan materias de ciencias básicas que representan dificultad para los estudiantes.​
-
-* Se evidenció una mayor tasa de deserción en los estratos 2 y 3.​
+ * Con el análisis realizado, se evidencia que los estratos 2 y 3 presentan una tasa de deserción significativamente mayor, lo que sugiere la necesidad de implementar estrategias de apoyo específicas para estos grupos.
 
  
 

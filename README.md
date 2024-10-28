@@ -16,8 +16,35 @@ Este proyecto aborda la problemática de la deserción estudiantil en institucio
 El sistema utilizará técnicas avanzadas de analítica y aprendizaje automático para construir un modelo predictivo que identifique a los estudiantes en riesgo. Esto permitirá implementar estrategias de intervención personalizadas, optimizar el uso de los recursos institucionales y fortalecer la toma de decisiones basadas en datos.
 
 ## Conclusiones
+ 
 
-**TODO**
+* Se encontró una alta correlación entre el promedio del último semestre, semestre cursado y estrato sobre la tasa de deserción de los estudiantes de ENDEPORTE.​
+
+* Se evidenció que los estudiantes residentes en municipios aledaños a Cali tienen una mayor tasa de deserción, posiblemente relacionada con el tiempo de desplazamiento hasta la entidad.​
+
+* Los estudiantes que desertaron obtuvieron un promedio en su último semestre 0.47 desviaciones estándar por debajo del promedio general de todos los estudiantes.​
+
+* Se encontró que la mayor tasa de deserción recae en los primeros tres semestres, posiblemente debido a que se cursan materias de ciencias básicas que representan dificultad para los estudiantes.​
+
+* Se evidenció una mayor tasa de deserción en los estratos 2 y 3.​
+
+ 
+
+### Validación Estadística: 
+
+* Se comprobó la significancia estadística de todas las conclusiones para las cuales se pudo realizar una prueba, con un p-value menor al 0.05.​ 
+
+* En efecto, todas las conclusiones para las cuales fue posible llevar a cabo una prueba resultaron estadísticamente significativas. 
+
+ 
+
+### Acciones próximas: 
+
+* Compartir los hallazgos con la entidad, con el fin de ser orientados en el refinamiento del modelo. 
+
+* Complementar el conocimiento que tiene la entidad sobre la problemática de deserción y así apoyar la toma de decisiones al respecto.​ 
+
+* Experimentar diferentes técnicas de modelado estadístico que permitan identificar el modelo que mejor se ajuste al contexto de los datos y la naturaleza del problema a solucionar. 
 
 ## Requerimientos
 

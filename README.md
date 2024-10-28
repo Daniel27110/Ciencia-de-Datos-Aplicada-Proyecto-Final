@@ -2,12 +2,21 @@
 
 
 ## Tabla de Contenidos
+* [Ubicación Entregables](#descripción-de-la-solución)
 * [Descripción de la solución](#descripción-de-la-solución)
 * [Conclusiones](#descripción-de-la-solución)
 * [Requerimientos](#requerimientos)
 * [Instalación](#instalación)
 * [Autores](#autores)
 * [Asociados](#autores)
+
+## Ubicación Entregables
+
+El documento de reporte de resultados se encuentra en el siguiente directorio:
+
+       Ciencia-de-Datos-Aplicada-Proyecto-Final/docs/Primera Entrega Proyecto Final.pdf
+
+En la misma carpeta también se pueden encontrar otros archivos relacionados con la primera entrega del proyecto final, como el mockup del dashboard de analítica y el diccionario de datos.
 
 ## Descripción de la solución
 
@@ -116,6 +125,8 @@ El software necesario para ejecutar el proyecto incluye:
    Para esta primera entrega, los archivos de exploración de datos se encuentran en el directorio del repositorio:
 
        Ciencia-de-Datos-Aplicada-Proyecto-Final/analytics/primera entrega/
+
+   En particular, el archivo 'EDA consolidado final.ipynb' contiene los resultados consolidados de nuestro proceso de análisis de datos. 
 
    Para la entrega final, la ejecución del tablero de control estará disponible en
 

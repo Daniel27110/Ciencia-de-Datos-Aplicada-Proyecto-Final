@@ -2,9 +2,9 @@
 
 
 ## Tabla de Contenidos
-* [Ubicación Entregables](#descripción-de-la-solución)
+* [Ubicación Entregables](#ubicación-entregables)
 * [Descripción de la solución](#descripción-de-la-solución)
-* [Conclusiones](#descripción-de-la-solución)
+* [Conclusiones](#conclusiones)
 * [Requerimientos](#requerimientos)
 * [Instalación](#instalación)
 * [Autores](#autores)
@@ -14,7 +14,7 @@
 
 El documento de reporte de resultados se encuentra en el siguiente directorio:
 
-       Ciencia-de-Datos-Aplicada-Proyecto-Final/docs/Primera Entrega Proyecto Final.pdf
+[Ciencia-de-Datos-Aplicada-Proyecto-Final/docs/Primera Entrega Proyecto Final.pdf](https://github.com/Daniel27110/Ciencia-de-Datos-Aplicada-Proyecto-Final/blob/main/docs/Primera%20Entrega%20Proyecto%20Final.pdf) 
 
 En la misma carpeta también se pueden encontrar otros archivos relacionados con la primera entrega del proyecto final, como el mockup del dashboard de analítica y el diccionario de datos realizado.
 

@@ -7,3 +7,8 @@ scikit-learn==1.5.2
 uvicorn
 fastapi
 joblib
+python-multipart
+imblearn
+plotly
+smote
+Markdown

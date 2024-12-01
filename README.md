@@ -63,6 +63,14 @@ A continuación se detallan las librerías utilizadas en el proyecto, junto con 
 - `scipy==1.14.1`: Operaciones avanzadas de cálculo científico y matemático.
 - `numpy==2.1.2`: Soporte para operaciones con arreglos multidimensionales y matemáticas de alto nivel.
 - `scikit-learn==1.5.2`: Herramientas de machine learning y análisis predictivo.
+- `uvicorn`
+- `fastapi`
+- `joblib`
+- `python-multipart`
+- `imblearn`
+- `plotly`
+- `smote`
+- `Markdown`
 
 ### Requerimientos Hardware
 Para ejecutar el proyecto en un entorno óptimo, se recomienda el siguiente hardware mínimo:

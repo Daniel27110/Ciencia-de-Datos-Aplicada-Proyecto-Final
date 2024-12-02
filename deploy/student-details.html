@@ -12,8 +12,6 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="charts.js" defer></script>
     <style>
         .body-box {
             font-family: Arial, sans-serif;
@@ -95,133 +93,85 @@
         <p>Una herramienta avanzada para prevenir la deserción escolar</p>
     </div>
 
-    <!-- Nav Tabs -->
+    <!-- Back Button -->
     <div class="container mt-4">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                    role="tab" aria-controls="home" aria-selected="false">Inicio</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="predict-tab" data-bs-toggle="tab" data-bs-target="#predict"
-                    type="button" role="tab" aria-controls="predict" aria-selected="true">Predicción Individual</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="group-tab" data-bs-toggle="tab" data-bs-target="#group" type="button"
-                    role="tab" aria-controls="group" aria-selected="false">Análisis Histórico</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="group-predict-tab" data-bs-toggle="tab" data-bs-target="#group-predict"
-                    type="button" role="tab" aria-controls="group-predict" aria-selected="false">Predicción
-                    Grupal</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <!-- Landing Page Tab -->
-            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="landing-title">
-                    <h2>Bienvenido a la Plataforma de Análisis Diseñada para la Escuela Nacional del Deporte</h2>
-                    <p>Explora datos, analiza tendencias y mejora la retención estudiantil.</p>
-                </div>
-                <div class="text-center">
-                    <img src="https://endeporte.edu.co/publicaciones/9/simbolos/info/endeporte/media/galeria3272.png"
-                        alt="Educación" class="landing-image">
+        <a href="/inicio" class="btn btn-secondary mb-4">Volver</a>
+    </div>
+
+    <!-- Student Details -->
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="student-info text-center">
+            <div>
+                <img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
+                    alt="Foto del Estudiante" class="student-image img-thumbnail">
+                <div style="font-size: 1.5em; font-weight: bold;">Estudiante</div>
+                <div id="prediction-status" class="status {{ status_class }}">
+                    Predicción: {{ status_text }}
                 </div>
             </div>
-            <!-- Prediction Tab -->
-            <div class="tab-pane fade show active" id="predict" role="tabpanel" aria-labelledby="predict-tab">
-                <div class="container d-flex justify-content-center align-items-center">
-                    <div class="student-info text-center">
-                        <div>
-                            <img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
-                                alt="Foto del Estudiante" class="student-image img-thumbnail">
-                            <div style="font-size: 1.5em; font-weight: bold;">Estudiante 14</div>
-                            <div class="status status-desertion">
-                                Predicción: En riesgo de Deserción
-                            </div>
-                        </div>
-                        <div class="student-details">
-                            <h3>Información del Estudiante</h3>
-                            <div class="control-panel">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>Estrato</th>
-                                        <td class="highlight-red">1</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Semestre</th>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Promedio Semestre</th>
-                                        <td class="highlight-red">2.1</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Edad</th>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Programa</th>
-                                        <td>Deporte</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Género</th>
-                                        <td>Masculino</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Ciudad de Residencia</th>
-                                        <td>Cali</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Ciudad de Nacimiento</th>
-                                        <td>Cali</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Group Analysis Tab -->
-            <div class="tab-pane fade" id="group" role="tabpanel" aria-labelledby="group-tab">
-                <h3 class="mt-4">Análisis del desempeño grupal de Todos los Estudiantes</h3>
-                <canvas id="graficoGrupal" width="400" height="200"></canvas>
-            </div>
-            <!-- Group Prediction Tab -->
-            <div class="tab-pane fade" id="group-predict" role="tabpanel" aria-labelledby="group-predict-tab">
-                <h3 class="mt-4">Realizar Predicción Grupal</h3>
-                <form class="row g-3 mt-3">
-                    <div class="col-md-12">
-                        <input type="file" id="csvFile" class="form-control">
-                    </div>
-                    <div class="col-12 text-center">
-                        <button type="button" class="btn btn-primary" onclick="hacerPrediccionGrupal()">Hacer
-                            Predicción</button>
-                    </div>
-                </form>
-                <h3 class="mt-4">Resultados</h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <canvas id="graficoHorizontal" width="400" height="200"
-                            style="width: 100%; height: auto;"></canvas>
-                    </div>
-                    <div class="col-md-6">
-                        <canvas id="graficoLine" width="400" height="200" style="width: 100%; height: auto;"></canvas>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <canvas id="graficoAgeDesertion" width="400" height="200"
-                            style="width: 100%; height: auto;"></canvas>
-                    </div>
-                    <div class="col-md-6">
-                        <canvas id="graficoCityDropout" width="400" height="200"
-                            style="width: 100%; height: auto;"></canvas>
-                    </div>
+            <div class="student-details">
+                <h3>Información del Estudiante</h3>
+                <div class="control-panel">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Estrato</th>
+                            <td id="estrato" class="{{ estrato_class }}">{{ ESTRATO }}</td>
+                        </tr>
+                        <tr>
+                            <th>Semestre</th>
+                            <td>{{ SEMESTRE }}</td>
+                        </tr>
+                        <tr>
+                            <th>Promedio Semestre</th>
+                            <td id="promedio" class="{{ promedio_class }}">{{ PROMEDIOSEMESTRE }}</td>
+                        </tr>
+                        <tr>
+                            <th>Edad</th>
+                            <td>{{ EDAD2 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Programa</th>
+                            <td>{{ PROGRAMA }}</td>
+                        </tr>
+                        <tr>
+                            <th>Género</th>
+                            <td>{{ GENERO }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ciudad de Residencia</th>
+                            <td>{{ CIUDADRESIDENCIA }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ciudad de Nacimiento</th>
+                            <td>{{ CIUDADNACIMIENTO }}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const statusText = document.getElementById("prediction-status").textContent;
+            const estrato = parseInt(document.getElementById("estrato").textContent);
+            const promedio = parseFloat(document.getElementById("promedio").textContent);
+
+            if (statusText.includes("En riesgo de Deserción")) {
+                document.getElementById("prediction-status").classList.add("status-desertion");
+            } else {
+                document.getElementById("prediction-status").classList.add("status-no-desertion");
+            }
+
+            if (estrato < 2) {
+                document.getElementById("estrato").classList.add("highlight-red");
+            }
+
+            if (promedio < 3) {
+                document.getElementById("promedio").classList.add("highlight-red");
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -267,8 +267,9 @@
             }, 'Horizontal Bar Chart');
 
             // Line Chart for Average Scores
-            const avgDesertores = (desertores.reduce((a, b) => a + b, 0) / desertores.length || 0) * 5;
-            const avgNoDesertores = (noDesertores.reduce((a, b) => a + b, 0) / noDesertores.length || 0) * 5;
+            // the score is in jsonData as PROMEDIOSEMESTRE
+            const avgDesertores = jsonData.filter((_, index) => result[index].prediccion === 0).reduce((acc, curr) => acc + curr.PROMEDIOSEMESTRE, 0) / desertores.reduce((acc, curr) => acc + curr, 0);
+            const avgNoDesertores = jsonData.filter((_, index) => result[index].prediccion === 1).reduce((acc, curr) => acc + curr.PROMEDIOSEMESTRE, 0) / noDesertores.reduce((acc, curr) => acc + curr, 0);
             const ctxLine = document.getElementById('graficoLine').getContext('2d');
             createChart(ctxLine, {
                type: 'line',
@@ -427,10 +428,6 @@
          <li class="nav-item" role="presentation">
             <button class="nav-link" id="predict-tab" data-bs-toggle="tab" data-bs-target="#predict" type="button"
                role="tab" aria-controls="predict" aria-selected="false">Predicción Individual</button>
-         </li>
-         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="group-tab" data-bs-toggle="tab" data-bs-target="#group" type="button"
-               role="tab" aria-controls="group" aria-selected="false">Análisis historico</button>
          </li>
          <li class="nav-item" role="presentation">
             <button class="nav-link" id="group-predict-tab" data-bs-toggle="tab" data-bs-target="#group-predict"

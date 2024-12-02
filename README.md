@@ -94,11 +94,11 @@ El software necesario para ejecutar el proyecto incluye:
 1. **Clonar el repositorio**:
    Primero, asegúrese de tener `git` instalado en su máquina. Luego, clone el repositorio en su entorno local:
    ```bash
-   git clone https://github.com/usuario/nombre-del-repositorio.git
+   git clone https://gitlab.com/CAOBA-Central/pruebas-concepto/uniandes/pruebas-concepto-g5-c9/poc-082-endeporte-deteccion-riesgos-academicos-fase1.git
    ```
    Cambie al directorio del proyecto:
    ```bash
-   cd nombre-del-repositorio
+   cd poc-082-endeporte-deteccion-riesgos-academicos-fase1
    ```
 
 2. **Crear un entorno virtual** (opcional pero recomendado):
@@ -109,7 +109,7 @@ El software necesario para ejecutar el proyecto incluye:
    Luego, activar el entorno:
    - En Windows:
      ```bash
-     .\env\Scripts\activate
+     .\env\Scripts\Activate.ps1
      ```
    - En macOS/Linux:
      ```bash
@@ -128,18 +128,100 @@ El software necesario para ejecutar el proyecto incluye:
    pip freeze
    ```
 
-4. **Ejecutar los archivos de exploración**:
 
-   Para esta primera entrega, los archivos de exploración de datos se encuentran en el directorio del repositorio:
+## Despliegue
 
-       Ciencia-de-Datos-Aplicada-Proyecto-Final/analytics/primera entrega/
+1. Instalar un ambiente virtual
+   ```python
+   pip install virtualenv
+   ```
 
-   En particular, el archivo 'EDA consolidado final.ipynb' contiene los resultados consolidados de nuestro proceso de análisis de datos. 
+2. Crear un entorno virtual:
+   ```bash
+   python -m venv env
+   ```
 
-   Para la entrega final, la ejecución del tablero de control estará disponible en
+3. Activar el entorno:
+   - En Windows:
+     ```bash
+     .\env\Scripts\Activate.ps1
+     ```
+   - En macOS/Linux:
+     ```bash
+     source env/bin/activate
+     ```
 
-       Ciencia-de-Datos-Aplicada-Proyecto-Final/analytics/entrega final/
+4. Instalar las dependencias
+   ```bash
+   pip install -r requirements.txt
+   ```
 
+5. Posteriormente, ingresar a la carpeta `deploy` y activar el servidor:
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+6. Una vez el servidor presente el mensaje de inicio correcto, similar al siguiente:
+   ```
+   INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+   INFO:     Started reloader process [15952] using StatReload
+   INFO:     Started server process [10220]
+   INFO:     Waiting for application startup.
+   INFO:     Application startup complete.
+   ```
+7. Luego de evidenciar el servidor en ejecución, se debe ingresar a un navegador e ingresar a la siguiente URL: http://127.0.0.1:8000/inicio , donde se carga una interfaz para diligenciar la información.
+   - Si se requiere consumir el modelo por un servicio REST, se puede probar el servicio con una herramienta como Postman, enviando:
+```
+   POST /predict HTTP/1.1
+   Host: 127.0.0.1:8000
+   Content-Type: application/json
+   [
+      {
+         "ESTRATO": 1,
+         "SEMESTRE": 1,
+         "PROMEDIOSEMESTRE": 3.8,
+         "EDAD2": 18,
+         "PROGRAMA": 53212,
+         "GENERO": 1,
+         "CIUDADRESIDENCIA": 76001,
+         "CIUDADNACIMIENTO": 76001
+      }
+   ]
+```
+
+Los valores de:
+- **PROGRAMA** corresponden a los códigos presentes en el archivo ubicado en `data/raw/programas.csv`
+- **CIUDADRESIDENCIA** el código corresponde al `Codigo_Municipio` presente en el archivo de **DIVIPOLA** ubicado en `data/raw/DIVIPOLA-_C_digos_municipios_20241127.csv`
+- **CIUDADNACIMIENTO** el código corresponde al `Codigo_Municipio` presente en el archivo de **DIVIPOLA** ubicado en `data/raw/DIVIPOLA-_C_digos_municipios_20241127.csv`
+
+**NOTA** En caso de requerir realizar predicciones grupales, se deberá completar la estructura del archivo ubicado en la ruta `deploy/estudiantes.csv` con los datos correspondientes. Una vez diligenciado el archivo, deberá cargarse en la sección de la interfaz gráfica denominada *"Predicción Grupal"*, seleccionando el archivo *estudiantes.csv* previamente completado, para obtener las predicciones individuales de cada estudiante registrado en dicho archivo.
+
+## Proceso de reentrenamiento del modelo
+
+Para ingresar nueva información y entrenar el modelo con esta, se debe:
+1. La fuente debe ser en formato *csv*, comprimida en `gz` y tener la misma cantidad de columnas y nombres como la fuente denominada `Demograficos.csv.gz` que se encuentra en `data/raw`.
+2. Si existen programas nuevos en la Institución y se desea incluir en la predicción, se debe agregar al archivo denominado `programas.csv` ubicado en la ruta `data/raw/` manteniendo los tipos de datos y estructura definida.
+> **NOTA** No eliminar registros existentes en el archivo `programas.csv` a menos que el programa ya no exista o no se quiera incluir en el modelo; lo anterior dado que el modelo toma este insumo y con ello hace los cruces respectivos de valores.
+3. Una vez se han realizado los anteriores pasos, se procede a ejecutar los notebooks ubicados en la ruta `data/analytics` en el siguiente orden:
+   1. `preparacion_de_datos.ipynb`: notebook que ajusta los datos y genera el archivo de salida para el modelo en la ruta `data/stage/clean.csv`
+   2. `seleccion_de_modelo.ipynb`: noteboook para visualizar valores estadísticos del archivo generado en el notebook anterior.
+   3. `modelo.ipynb`: notebook que ejecuta el modelo y genera el archivo compilado `deploy/rf_model.joblib` para ejecución en el despliegue.
+
+## Instrucciones de Uso
+
+Para realizar la predicción grupal de estudiantes, siga estos pasos una vez haya desplegado la herramienta web en **http://127.0.0.1:8000/inicio**:
+
+1. **Acceder a la sección 'Predicción Grupal'**: 
+   Una vez que la herramienta web esté cargada, diríjase a la sección **"Predicción Grupal"** en la interfaz.
+
+2. **Cargar el archivo de estudiantes**:
+   En esta sección, deberá cargar un archivo con los datos de los estudiantes en el formato esperado. Puede utilizar como ejemplo el archivo **`estudiantes.csv`** que se encuentra en el directorio **`deploy`**. Este archivo contiene un conjunto de datos de estudiantes con la estructura correcta para la predicción.
+
+3. **Visualización de predicciones**:
+   Después de cargar el archivo, podrá ver la predicción de si cada uno de los estudiantes registrados en el archivo va a desertar o no. Además, se mostrará una caracterización de los estudiantes que tienen mayor probabilidad de desertar.
+
+4. **Análisis detallado de cada estudiante**:
+   Si desea un análisis más profundo de un estudiante en particular, puede hacer clic en el listado de estudiantes. Esto le permitirá acceder a un análisis detallado que muestra las razones individuales que podrían llevar a cada uno de esos estudiantes a desertar.
 
 ## Autores
 

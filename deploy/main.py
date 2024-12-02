@@ -4,6 +4,8 @@ from fastapi import FastAPI, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, Request
+import json
 
 from datamodel import DataModel
 from model import PredictionModel
@@ -18,6 +20,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+city_mapping = {
+    "76001": "Cali",
+    "5002": "Palmira",
+    "76111": "Jumbo",
+    "76243": "Yumbo",
+    "76130": "Cartago"
+}
+
 
 @app.get("/")
 def read_root():
@@ -61,15 +72,6 @@ def read_root():
     with open("index.html", "r", encoding="utf-8") as f:
         return HTMLResponse(content=f.read(), status_code=200)
 
-# New endpoint to return group data
-@app.get("/datos-grupales")
-def get_datos_grupales():
-    datos = [
-        {"year": 2020, "desertores": 50, "noDesertores": 150},
-        {"year": 2021, "desertores": 40, "noDesertores": 160},
-        {"year": 2022, "desertores": 30, "noDesertores": 170},
-    ]
-    return datos
 
 # New endpoint for group prediction
 @app.post("/predict-group")
@@ -91,7 +93,37 @@ async def predict_group(data: List[dict] = Body(...)):
         raise HTTPException(status_code=500, detail=str(e))
     
 @app.get("/student-details", response_class=HTMLResponse)
-# Open the student-details.html file and return it as a response
-def read_root():
-    with open("student-details.html", "r", encoding="utf-8") as f:
-        return HTMLResponse(content=f.read(), status_code=200)
+def read_root(request: Request):
+    data = request.query_params.get('data')
+    if data:
+        student_details = json.loads(data)
+        
+        # Post-process the values
+        student_details["GENERO"] = "masculino" if student_details["GENERO"] == "0" else "femenino"
+        student_details["CIUDADRESIDENCIA"] = city_mapping.get(student_details["CIUDADRESIDENCIA"], student_details["CIUDADRESIDENCIA"])
+        student_details["CIUDADNACIMIENTO"] = city_mapping.get(student_details["CIUDADNACIMIENTO"], student_details["CIUDADNACIMIENTO"])
+        
+        with open("student-details.html", "r", encoding="utf-8") as f:
+            content = f.read()
+            # Determine status text and class based on prediction
+            status_text = "En riesgo de Deserción" if student_details["prediccion"] == 0 else "No en riesgo de Deserción"
+            status_class = "status-desertion" if student_details["prediccion"] == 0 else "status-no-desertion"
+            # Determine classes for highlighting
+            estrato_class = "highlight-red" if student_details["ESTRATO"] < 2 else ""
+            promedio_class = "highlight-red" if student_details["PROMEDIOSEMESTRE"] < 3 else ""
+            # Replace placeholders with actual data
+            content = content.replace("{{ status_text }}", status_text)
+            content = content.replace("{{ status_class }}", status_class)
+            content = content.replace("{{ estrato_class }}", estrato_class)
+            content = content.replace("{{ promedio_class }}", promedio_class)
+            for key, value in student_details.items():
+                content = content.replace(f"{{{{ {key} }}}}", str(value))
+                
+            # add the element prediction-text to the content, if the prediccion is 0, the text will be "En riesgo de deserción", otherwise "No está en riesgo de deserción"
+            if student_details["prediccion"] == 0:
+                content = content.replace("{{ prediction-text }}", "En riesgo de deserción")
+            else:
+                content = content.replace("{{ prediction-text }}", "No está en riesgo de deserción")
+            return HTMLResponse(content=content, status_code=200)
+    else:
+        return HTMLResponse(content="No data provided", status_code=400)

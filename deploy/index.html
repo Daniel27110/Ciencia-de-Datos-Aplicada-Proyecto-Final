@@ -253,8 +253,14 @@
                   onClick: (event, elements) => {
                      if (elements.length > 0) {
                         const index = elements[0].index;
-                        const student = result[index];
-                        window.location.href = 'student-details';
+                        const student = jsonData[index];
+                        const prediction = result[index];
+                        const studentDetails = {
+                           ...student,
+                           prediccion: prediction.prediccion
+                        };
+                        window.location.href = `student-details?data=${encodeURIComponent(JSON.stringify(studentDetails))}`;
+                        console.log('Student Details:', studentDetails);
                      }
                   }
                }

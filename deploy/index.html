@@ -159,12 +159,21 @@
             return;
          }
 
+         const cityMapping = {
+            "76001": "Cali",
+            "5002": "Palmira",
+            "76111": "Jumbo",
+            "76243": "Yumbo",
+            "76130": "Cartago"
+         };
+
          const reader = new FileReader();
          reader.onload = async function (e) {
             const csvData = e.target.result;
             const rows = csvData.split('\n').slice(1); // Skip header row
             const jsonData = rows.map(row => {
                const values = row.split(',');
+               console.log('Values:', values); // Para depuración
                return {
                   "ESTRATO": parseInt(values[0]),
                   "SEMESTRE": parseInt(values[1]),
@@ -242,6 +251,11 @@
                      y: { title: { display: true, text: 'Estudiantes' } }
                   },
                   onClick: (event, elements) => {
+                     if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const student = result[index];
+                        window.location.href = 'student-details';
+                     }
                   }
                }
             }, 'Horizontal Bar Chart');
@@ -276,10 +290,8 @@
             }, 'Line Chart');
 
             // Line Chart for Age vs. Desertion
-            // use mock data for this example, roughly 20% desertion rate for each age group
-            const ageLabels = Array.from({ length: 10 }, (_, i) => i + 15);
-            const desertionRate = 0.2;
-            const desertionData = ageLabels.map(age => Math.random() < desertionRate ? 1 : 0);
+            const ageLabels = [...new Set(jsonData.map(r => r.EDAD2))].sort((a, b) => a - b);
+            const desertionData = ageLabels.map(age => jsonData.filter(r => r.EDAD2 === age && result[jsonData.indexOf(r)].prediccion === 0).length);
             const ctxAgeDesertion = document.getElementById('graficoAgeDesertion').getContext('2d');
             createChart(ctxAgeDesertion, {
                type: 'line',
@@ -307,9 +319,8 @@
             }, 'Age vs. Desertion Line Chart');
 
             // Bar Chart for City Dropout
-            // use mock data to show cali with 7 dropouts, Palmira with 3 dropouts, and the rest with 0 dropouts
-            const cityLabels = ['Cali', 'Palmira', 'Yumbo', 'Jamundí', 'Buga', 'Tuluá', 'Cartago', 'Buenaventura'];
-            const cityDesertions = [7, 3, 0, 0, 0, 0, 0, 0];
+            const cityLabels = [...new Set(jsonData.map(r => cityMapping[r.CIUDADRESIDENCIA]))];
+            const cityDesertions = cityLabels.map(city => jsonData.filter(r => cityMapping[r.CIUDADRESIDENCIA] === city && result[jsonData.indexOf(r)].prediccion === 0).length);
             const ctxCityDropout = document.getElementById('graficoCityDropout').getContext('2d');
             createChart(ctxCityDropout, {
                type: 'bar',
@@ -337,7 +348,6 @@
          };
          reader.readAsText(file);
       }
-
       // Cargar las opciones de ciudades cuando la página se cargue
       window.onload = () => {
          cargarOpciones();
@@ -498,7 +508,7 @@
             <h3 class="mt-4">Realizar Predicción Grupal</h3>
             <form class="row g-3 mt-3">
                <div class="col-md-12">
-                  <input type="file" id="csvFile" class="form-control" accept=".csv">
+                  <input type="file" id="csvFile" class="form-control">
                </div>
                <div class="col-12 text-center">
                   <button type="button" class="btn btn-primary" onclick="hacerPrediccionGrupal()">Hacer
@@ -514,10 +524,19 @@
                   <canvas id="graficoLine" width="400" height="200" style="width: 100%; height: auto;"></canvas>
                </div>
             </div>
-         </div>
+            <div class="row mt-4">
+               <div class="col-md-6">
+                  <canvas id="graficoAgeDesertion" width="400" height="200" style="width: 100%; height: auto;"></canvas>
+               </div>
+               <div class="col-md-6">
+                  <canvas id="graficoCityDropout" width="400" height="200" style="width: 100%; height: auto;"></canvas>
+               </div>
 
+            </div>
+
+
+         </div>
       </div>
-   </div>
 </body>
 
 </html>
